@@ -1,4 +1,3 @@
-const { type } = require('os');
 const util = require('util')
 const obterEnderecoAsync = util.promisify(obterEndereco)
 
@@ -35,10 +34,9 @@ function obterEndereco(useriD, callback) {
         })
     }, 500);
 }
+
 // conceito de pipe: usuario -> telefone -> ultima função é o telefone.
 const user = obterUser()
-
-
 user
     .then(user => obterTel(user.id) // definindo telefone
         .then(tel => { // promise da função obterTel => result = dados tel
