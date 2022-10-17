@@ -1,4 +1,4 @@
-const obterPessoas = require('../services/services')
+const obterPessoas = require('./services/services')
 
 async function main() {
     try {
