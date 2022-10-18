@@ -17,7 +17,13 @@ async function main() {
         const { results } = await obterPessoas('a')
         const familiaLars = results.meuFilter(item => {
             // const familiaLars = results.filter(item => {
+            // por padrão, precisa retornar boolean 
+            // para informar se deve manter ou remover da lista
+            // false > remove da lista
+            // true > mantém na lista
             const result = item.name.toLowerCase().indexOf('lars') !== -1
+                    // não encontrou = -1
+                    // encontrou = posicao no Array
             return result
         })
         const names = familiaLars.map(pessoa => pessoa.name)
