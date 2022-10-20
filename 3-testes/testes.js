@@ -19,6 +19,7 @@ async function obterPessoa(nome) {
 }
 
 describe('star wars tests', function () {
+
     // antes de cada tarefa, executa uma função => this.before
     this.beforeAll(() => {
         const dataResponse = {
