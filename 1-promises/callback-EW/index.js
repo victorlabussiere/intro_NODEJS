@@ -38,26 +38,25 @@ function obterEnd(userTel, callback) {
 // Executando código.
 
 console.log('buscando usuário')
-obterUser(function (erro, usuario){
-    if(erro) {
+
+obterUser((erro, usuario) => {
+
+    if (erro) {
         console.error('problemas com usuário: ', error)
     }
-    console.log(usuario)
-    // caso de sucesso, prosseguir buscando o telefone:
-    console.log('buscando o telefone do usuário')
-    obterTel(usuario.id, function(erroTel, telefone){
+
+    console.log(usuario.user)
+    obterTel(usuario.id, function (erroTel, telefone) { // callback da obterUser => Inicia a busca pelo telefone após receber a resposta do usuário
         if (erroTel) {
             console.error('problemas com telefone: ', error)
         }
         console.log(telefone)
-        console.log('buscando o endereço do usuário')
-        // caso dee sucesso, prosseguir buscando o endereço:
-        obterEnd(telefone, function(erroEnd, endereco){
-            if(erroEnd) {
+        obterEnd(telefone, function (erroEnd, endereco) { // callback da obterTek => Inicia a busca pelo endereço após receber a resposta do telefone
+            if (erroEnd) {
                 console.error('problemas com enderço: ', error)
             }
+
             console.log(endereco)
-            // retornando o perfil completo do usuário:
             console.log(`
                 O usuário de ID ${usuario.user.id}, possui o telefone (${telefone.ddd}) ${telefone.tel} e reside na rua ${endereco.rua}, número ${endereco.numero}
             `)

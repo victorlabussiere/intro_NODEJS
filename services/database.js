@@ -5,8 +5,11 @@ const readFileAsync = promisify(readFile)
 class Database {
 
     constructor() {
+
         this.NOME_ARQUIVO = '../services/herois.json'
+
     }
+
     async obterDadosArquivo() {
 
         let arquivo = await readFileAsync(this.NOME_ARQUIVO, 'utf8')
@@ -15,9 +18,9 @@ class Database {
 
     }
 
-    escreverArquivo() {
+    // escreverArquivo() {
 
-    }
+    // }
 
     async listar(id) {
 
