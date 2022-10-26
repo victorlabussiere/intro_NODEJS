@@ -1,30 +1,27 @@
-const { deepEqual, ok } = require('assert')
+const { deepEqual } = require('assert')
 const exp = require('constants')
-const database = require('../services/database')
+const database = require('./services/database')
 
-const DEFAULT_ITEM_CADASTRAR = {
+const initialHero = {
     nome: 'Flash',
     poder: 'Speed',
     id: 1
 }
 
-const batman = {
-    nome: "batman",
-    poder: "bilionario",
-}
-
 describe('Suite de manipulação de heróis', () => {
-    it('Deve pesquisar um héroi usando arquivos', async () => {
-        const expected = DEFAULT_ITEM_CADASTRAR;
-        const [resultado] = await database.listar(expected.id) // a função é do objeto database => listar(item)
+    
+    before(async () => {
+        const lista = await database.listar()
+        return lista.length === 0 ? database.cadastrar(initialHero) : false
+    })
+
+    it('Deve pesquisar o héroi desejado nos arquivos do sistema', async () => {
+
+        const expected = initialHero
+        const [resultado] = await database.listar(expected.id)
+        console.log("Objeto desejado:", expected)
+        console.log("Objeto encontrado:", resultado)
         deepEqual(resultado, expected)
-    })
 
-    it('Deve cadastrar um herói usando arquivos', async () => {
-        const expected = DEFAULT_ITEM_CADASTRAR
-        const resultado = await database.cadastrar(DEFAULT_ITEM_CADASTRAR)
-        const [actual] = await database.listar(DEFAULT_ITEM_CADASTRAR.id)
-        deepEqual(actual, expected)
     })
-
 })
