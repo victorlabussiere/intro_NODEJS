@@ -12,7 +12,7 @@ describe("Implementação de um novo herói na lista", async () => {
         const expected = true
         const resultado = await database.cadastrar(BATMAN)
         console.log("Resposta desejada:", expected)
-        console.log("Resposta postada:", resultado)
+        console.log("Resposta postada   :", resultado)
         assert.deepEqual(resultado, expected)
     })
 })

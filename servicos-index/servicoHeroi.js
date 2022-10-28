@@ -1,13 +1,12 @@
 const { readFile, writeFile } = require('fs')
 const { promisify } = require('util')
-
 const writeFileAsync = promisify(writeFile)
 const readFileAsync = promisify(readFile)
 
 class Database {
 
     constructor() {
-        this.NOME_ARQUIVO = './services/herois.json'
+        this.NOME_ARQUIVO = './servicos-index/db.json'
     }
 
     async $obterDadosArquivo() {
@@ -46,18 +45,11 @@ class Database {
     }
 
     async remover(heroId) {
-
         const dados = await this.$obterDadosArquivo()
-        const indice = dados.findIndex(i => i.id === parseInt(heroId))
-
-        if (indice === -1) {
-            throw Error('Não existem registros desse herói em nosso sistema')
-        }
-
-        dados.splice(indice, 1)
-        console.log("Herói removido com sucesso. Lista atualizada:", dados)
-        return await this.$escreverArquivo(dados)
-
+        const indice = dados.findIndex(i => parseInt(i.id) === parseInt(heroId))
+        
+        indice === -1 ? console.error('Não existem registros desse herói em nosso sistema') : await dados.splice(indice, 1)
+        return await this.$escreverArquivo(dados) 
     }
 
     async atualizar(id, modificacoes) {
